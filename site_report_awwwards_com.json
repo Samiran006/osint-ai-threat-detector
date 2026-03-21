@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-03-21 12:02:51",
+  "url": "https://www.awwwards.com/",
+  "domain": "awwwards.com",
+  "risk_level": "LOW",
+  "risk_score": 24,
+  "findings": [
+    {
+      "id": "HDR-002",
+      "sev": "HIGH",
+      "title": "Missing Content Security Policy (CSP)",
+      "detail": "No CSP header found. The site is vulnerable to XSS and data injection attacks.",
+      "fix": "Define a Content-Security-Policy header. Start with: Content-Security-Policy: default-src 'self'"
+    },
+    {
+      "id": "HDR-006",
+      "sev": "LOW",
+      "title": "Missing Permissions-Policy",
+      "detail": "Browser features (camera, microphone, geolocation) are not explicitly restricted.",
+      "fix": "Add header: Permissions-Policy: geolocation=(), microphone=(), camera=()"
+    },
+    {
+      "id": "HDR-007",
+      "sev": "LOW",
+      "title": "Server Version Disclosure",
+      "detail": "Server header exposes: 'nginx'. Attackers can target specific CVEs.",
+      "fix": "Configure the web server to suppress or obscure the Server header."
+    }
+  ],
+  "virustotal": {
+    "ok": true,
+    "malicious": 0,
+    "suspicious": 0,
+    "harmless": 62,
+    "undetected": 33,
+    "total": 95,
+    "reputation": 0,
+    "categories": [
+      "computersandsoftware",
+      "web applications",
+      "information technology",
+      "information technology"
+    ],
+    "tags": [
+      "third-party-cookies",
+      "iframes",
+      "trackers",
+      "external-resources"
+    ],
+    "final_url": "https://www.awwwards.com/",
+    "title": "Awwwards - Website Awards - Best Web Design Trends",
+    "votes_mal": 0,
+    "votes_har": 0,
+    "flagged_by": []
+  },
+  "ssl": {
+    "expires": "Feb  6 08:54:54 2027 GMT",
+    "days_left": 322,
+    "protocol": "TLSv1.2",
+    "cn": "*.awwwards.com",
+    "issuer": "GoDaddy.com, Inc."
+  },
+  "ssl_findings": [],
+  "header_findings": [
+    {
+      "id": "HDR-002",
+      "sev": "HIGH",
+      "title": "Missing Content Security Policy (CSP)",
+      "detail": "No CSP header found. The site is vulnerable to XSS and data injection attacks.",
+      "fix": "Define a Content-Security-Policy header. Start with: Content-Security-Policy: default-src 'self'"
+    },
+    {
+      "id": "HDR-006",
+      "sev": "LOW",
+      "title": "Missing Permissions-Policy",
+      "detail": "Browser features (camera, microphone, geolocation) are not explicitly restricted.",
+      "fix": "Add header: Permissions-Policy: geolocation=(), microphone=(), camera=()"
+    },
+    {
+      "id": "HDR-007",
+      "sev": "LOW",
+      "title": "Server Version Disclosure",
+      "detail": "Server header exposes: 'nginx'. Attackers can target specific CVEs.",
+      "fix": "Configure the web server to suppress or obscure the Server header."
+    }
+  ],
+  "content_findings": [],
+  "domain_findings": []
+}

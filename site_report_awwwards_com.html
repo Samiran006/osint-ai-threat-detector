@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SENTINEL Threat Report — awwwards.com</title>
+<style>
+  :root {
+    --bg: #0a0e1a; --bg2: #111827; --bg3: #1f2937;
+    --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b;
+    --brand: #00ffb2; --border: rgba(0,255,178,0.15);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif;
+          font-size:15px; line-height:1.7; padding:0; }
+  header { background:var(--bg2); border-bottom:1px solid var(--border);
+            padding:24px 40px; display:flex; align-items:center; gap:16px; }
+  .logo { font-family:monospace; font-size:22px; font-weight:700;
+           color:var(--brand); letter-spacing:2px; }
+  .logo-sub { font-size:11px; color:var(--text3); letter-spacing:3px; text-transform:uppercase; }
+  .container { max-width:960px; margin:0 auto; padding:32px 24px; }
+  h2 { font-size:18px; font-weight:600; color:var(--brand);
+        margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  h3 { font-size:15px; font-weight:600; margin-bottom:12px; }
+  .hero { background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+           padding:28px 32px; margin-bottom:24px; }
+  .hero-url { font-family:monospace; font-size:14px; color:var(--text2);
+               word-break:break-all; margin-bottom:20px; }
+  .risk-badge { display:inline-block; font-size:28px; font-weight:800;
+                 color:#06d6a0; letter-spacing:2px; margin-bottom:8px; }
+  .score-bar-wrap { margin:12px 0; }
+  .score-bar-track { background:rgba(255,255,255,0.06); border-radius:4px;
+                      height:10px; overflow:hidden; width:100%; max-width:420px; }
+  .score-bar-fill { height:100%; border-radius:4px; width:24%;
+                     background:linear-gradient(90deg,#00ffb2,#ffd166,#ff4d4d); }
+  .score-label { font-size:13px; color:var(--text2); margin-top:4px; }
+  .counts-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:20px; }
+  .count-box { background:var(--bg3); border-radius:8px; padding:14px; text-align:center;
+                border:1px solid var(--border); }
+  .count-num { font-size:26px; font-weight:700; }
+  .count-lbl { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:1px; }
+  .section { background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+              padding:24px 28px; margin-bottom:20px; }
+  .summary-box { background:rgba(0,255,178,0.06); border:1px solid var(--border);
+                  border-radius:8px; padding:20px; margin-bottom:20px;
+                  font-size:15px; line-height:1.8; }
+  .sev-section { margin-bottom:20px; }
+  .sev-header { font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+                 padding:6px 0; margin-bottom:10px; border-bottom:1px solid; }
+  .finding-card { border-radius:8px; padding:14px 16px; margin-bottom:10px; }
+  .finding-id { font-family:monospace; font-size:11px; font-weight:700;
+                 letter-spacing:1px; margin-bottom:4px; }
+  .finding-title { font-size:15px; font-weight:600; margin-bottom:8px; }
+  .finding-row { font-size:13px; color:var(--text2); margin-top:4px; }
+  .fix-row { color:#06d6a0; }
+  .label { font-weight:600; margin-right:6px; }
+  .vt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px; }
+  .vt-stat { background:var(--bg3); border-radius:8px; padding:16px; text-align:center;
+              border:2px solid; }
+  .vt-num { display:block; font-size:32px; font-weight:800; }
+  .vt-lbl { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:1px; }
+  .info-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .info-table td { padding:8px 12px; border-bottom:1px solid var(--border); }
+  .info-table td:first-child { color:var(--text3); width:160px; }
+  footer { text-align:center; padding:24px; font-size:12px; color:var(--text3);
+            border-top:1px solid var(--border); margin-top:32px; }
+  @media(max-width:600px) {
+    .counts-grid { grid-template-columns:1fr 1fr; }
+    .vt-grid { grid-template-columns:1fr; }
+    header { padding:16px 20px; }
+    .container { padding:20px 16px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="logo">SENTINEL·AI</div>
+    <div class="logo-sub">Website Threat Intelligence Report</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-url">🔗 https://www.awwwards.com/</div>
+    <div class="risk-badge">LOW</div>
+    <div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill"></div></div>
+      <div class="score-label">Risk Score: <strong>24/100</strong> &nbsp;|&nbsp; Scanned: 2026-03-21 12:02:51</div>
+    </div>
+    <div class="counts-grid">
+      <div class="count-box">
+        <div class="count-num" style="color:#ff4d4d">0</div>
+        <div class="count-lbl">Critical</div>
+      </div>
+      <div class="count-box">
+        <div class="count-num" style="color:#ff8c42">1</div>
+        <div class="count-lbl">High</div>
+      </div>
+      <div class="count-box">
+        <div class="count-num" style="color:#ffd166">0</div>
+        <div class="count-lbl">Medium</div>
+      </div>
+      <div class="count-box">
+        <div class="count-num" style="color:#06d6a0">2</div>
+        <div class="count-lbl">Low</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <h2>Plain-English Summary</h2>
+    <div class="summary-box">The website awwwards.com has minor security concerns — 3 issue(s) found, none of which are critical. Address these when possible to improve your security posture.</div>
+  </div>
+
+  
+        <div class="section">
+          <h2>VirusTotal Analysis</h2>
+          <div class="vt-grid">
+            <div class="vt-stat" style="border-color:#06d6a0">
+              <span class="vt-num" style="color:#06d6a0">0</span>
+              <span class="vt-lbl">Malicious</span>
+            </div>
+            <div class="vt-stat" style="border-color:#ffd166">
+              <span class="vt-num" style="color:#ffd166">0</span>
+              <span class="vt-lbl">Suspicious</span>
+            </div>
+            <div class="vt-stat" style="border-color:#06d6a0">
+              <span class="vt-num" style="color:#06d6a0">95</span>
+              <span class="vt-lbl">Engines Total</span>
+            </div>
+          </div>
+          <p><strong>Flagged by:</strong> None</p>
+          <p><strong>Categories:</strong> computersandsoftware, web applications, information technology, information technology</p>
+        </div>
+
+  
+        <div class="section">
+          <h2>SSL / TLS Certificate</h2>
+          <table class="info-table">
+            <tr><td>Common Name</td><td>*.awwwards.com</td></tr>
+            <tr><td>Issuer</td><td>GoDaddy.com, Inc.</td></tr>
+            <tr><td>Expires</td><td>Feb  6 08:54:54 2027 GMT</td></tr>
+            <tr><td>Days Remaining</td><td>322</td></tr>
+            <tr><td>Protocol</td><td>TLSv1.2</td></tr>
+          </table>
+        </div>
+
+  <!-- Findings -->
+  <div class="section">
+    <h2>All Findings — 3 Issue(s) Detected</h2>
+    
+        <div class="sev-section">
+          <h3 class="sev-header" style="color:#ff8c42;border-color:#ff8c42">
+            HIGH — 1 finding(s)
+          </h3>
+          <div class="finding-card" style="border-left:4px solid #ff8c42;background:#1a080022">
+            <div class="finding-id" style="color:#ff8c42">[HDR-002]</div>
+            <div class="finding-title">Missing Content Security Policy (CSP)</div>
+            <div class="finding-row">
+              <span class="label">Detail:</span>
+              <span>No CSP header found. The site is vulnerable to XSS and data injection attacks.</span>
+            </div>
+            <div class="finding-row fix-row">
+              <span class="label">Fix:</span>
+              <span>Define a Content-Security-Policy header. Start with: Content-Security-Policy: default-src &#x27;self&#x27;</span>
+            </div>
+          </div>
+        </div>
+        <div class="sev-section">
+          <h3 class="sev-header" style="color:#06d6a0;border-color:#06d6a0">
+            LOW — 2 finding(s)
+          </h3>
+          <div class="finding-card" style="border-left:4px solid #06d6a0;background:#001a1222">
+            <div class="finding-id" style="color:#06d6a0">[HDR-006]</div>
+            <div class="finding-title">Missing Permissions-Policy</div>
+            <div class="finding-row">
+              <span class="label">Detail:</span>
+              <span>Browser features (camera, microphone, geolocation) are not explicitly restricted.</span>
+            </div>
+            <div class="finding-row fix-row">
+              <span class="label">Fix:</span>
+              <span>Add header: Permissions-Policy: geolocation=(), microphone=(), camera=()</span>
+            </div>
+          </div>
+          <div class="finding-card" style="border-left:4px solid #06d6a0;background:#001a1222">
+            <div class="finding-id" style="color:#06d6a0">[HDR-007]</div>
+            <div class="finding-title">Server Version Disclosure</div>
+            <div class="finding-row">
+              <span class="label">Detail:</span>
+              <span>Server header exposes: &#x27;nginx&#x27;. Attackers can target specific CVEs.</span>
+            </div>
+            <div class="finding-row fix-row">
+              <span class="label">Fix:</span>
+              <span>Configure the web server to suppress or obscure the Server header.</span>
+            </div>
+          </div>
+        </div>
+  </div>
+
+</div>
+
+<footer>
+  SENTINEL AI · Rule-Based Threat Intelligence · Free &amp; Open ·
+  Generated 2026-03-21 12:02:51
+</footer>
+</body>
+</html>

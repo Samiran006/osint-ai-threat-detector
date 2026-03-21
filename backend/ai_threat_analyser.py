@@ -30,7 +30,7 @@ import json
 import urllib.request
 import urllib.error
 from datetime import datetime
-
+from url_threat_scanner import scan as scan_url
 # ── ANSI terminal colours ──────────────────────────────────────────────────────
 RESET   = "\033[0m"
 BOLD    = "\033[1m"
@@ -579,29 +579,81 @@ def print_report(ip: str, report: dict) -> None:
 # ══════════════════════════════════════════════════════════════════════════════
 #  8 — Entry Point
 # ══════════════════════════════════════════════════════════════════════════════
-
 if __name__ == "__main__":
     load_env(".env")
 
     vt_key = os.environ.get("VIRUSTOTAL_API_KEY")
     if not vt_key:
         print(f"{RED}[ERROR]{RESET} VIRUSTOTAL_API_KEY is missing from .env")
-        print(f"  Get a free key at: https://www.virustotal.com/gui/my-apikey")
         sys.exit(1)
 
-    ip = sys.argv[1].strip() if len(sys.argv) > 1 else input(f"\n{CYAN}Enter IP address:{RESET} ").strip()
-    if not ip:
-        print(f"{RED}[ERROR]{RESET} No IP address provided.")
-        sys.exit(1)
+    print("\n========== SENTINEL MENU ==========")
+    print("1. IP Threat Analysis")
+    print("2. Website URL Scan")
+    choice = input("Enter choice: ").strip()
 
-    print(f"\n  {DIM}[1/3] Querying VirusTotal for {ip} …{RESET}")
-    vt_data = virustotal_lookup(ip, vt_key)
+    # -------------------------------
+    # OPTION 1: IP ANALYSIS (existing)
+    # -------------------------------
+    if choice == "1":
+        ip = input(f"\n{CYAN}Enter IP address:{RESET} ").strip()
+        if not ip:
+            print(f"{RED}[ERROR]{RESET} No IP provided.")
+            sys.exit(1)
 
-    print(f"  {DIM}[2/3] Extracting threat signals …{RESET}")
-    print(f"  {DIM}[3/3] Running intelligence engine …{RESET}")
-    report = analyze(vt_data)
+        print(f"\n  {DIM}[1/3] Querying VirusTotal for {ip} …{RESET}")
+        vt_data = virustotal_lookup(ip, vt_key)
 
-    print_report(ip, report)
+        print(f"  {DIM}[2/3] Extracting threat signals …{RESET}")
+        print(f"  {DIM}[3/3] Running intelligence engine …{RESET}")
+        report = analyze(vt_data)
+
+        print_report(ip, report)
+    # Save report ONLY for IP scan
+    
+        out_file = f"threat_report_{ip.replace('.', '_')}.json"
+        with open(out_file, "w") as f:
+            json.dump(
+            {
+                "generated_at": datetime.now().isoformat(),
+                "ip": ip,
+                "virustotal": vt_data,
+                "ai_analysis": report,
+            },
+            f, indent=2
+        )
+        print(f"  {DIM}Full report saved → {out_file}{RESET}\n")
+
+    # -------------------------------
+    # OPTION 2: WEBSITE SCAN (NEW)
+    # -------------------------------
+    elif choice == "2":
+        url = input("\nEnter website URL: ").strip()
+        if not url:
+            print(f"{RED}[ERROR]{RESET} No URL provided.")
+            sys.exit(1)
+
+        score, level = scan_url(url, vt_key)
+
+        print("\n[WEBSITE SCAN RESULT]")
+        print("Risk Level:", level)
+        print("Risk Score:", score)
+    # Save URL report
+        out_file = f"url_report.json"
+        with open(out_file, "w") as f:
+            json.dump(
+            {
+                "generated_at": datetime.now().isoformat(),
+                "url": url,
+                "risk_level": level,
+                "risk_score": score
+            },
+            f, indent=2
+        )
+        print(f"{DIM}Saved → {out_file}{RESET}")
+    else:
+        print(f"{RED}[ERROR]{RESET} Invalid choice.")    
+
 
     # Save full JSON report to disk
     out_file = f"threat_report_{ip.replace('.', '_')}.json"
@@ -609,7 +661,7 @@ if __name__ == "__main__":
         json.dump(
             {
                 "generated_at": datetime.now().isoformat(),
-                "ip":          ip,
+                "ip": ip,
                 "virustotal":  vt_data,
                 "ai_analysis": report,
             },
